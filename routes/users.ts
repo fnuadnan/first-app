@@ -14,7 +14,7 @@ router.get("/me", auth, async (req: any, res) => {
 router.post("/", async (req, res) => {
   const result = validateUser(req.body);
   console.log(req.body);
-  if (!result.success) return res.status(400).send(result.error);
+  if (!result.success) return res.status(400).send(result);
 
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registerred");

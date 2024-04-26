@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const result = validateMovie(req.body);
   if (!result.success)
-    return res.status(400).send(result.error?.issues);
+    return res.status(400).send(result);
 
   const genre = await Genre.findById(req.body.genreId);
   if (!genre) return res.status(400).send("Invalid genre.");

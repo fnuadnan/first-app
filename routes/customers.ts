@@ -22,7 +22,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   const result = validateCustomer(req.body);
   if (!result.success)
-    return res.status(400).send(result.error?.issues[0].message);
+    return res.status(400).send(result);
 
   const newCustomer = new Customer({ name: req.body.name });
 
@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const result = validateCustomer(req.body);
   if (!result.success)
-    return res.status(404).send(result.error?.issues[0].message);
+    return res.status(404).send(result);
 
   const customer = await Customer.findByIdAndUpdate(
     req.params.id,
